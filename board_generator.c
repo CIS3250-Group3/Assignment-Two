@@ -1,7 +1,7 @@
 #include "board_generator.h"
 
 // Initializes the dice in the list of pre-set dice. Call once at program start.
-void initializePresetDice(struct presetDice* inputArrayOfDice) {
+void initializePresetDice(struct presetDice *inputArrayOfDice) {
 	for (int i = 0; i < 16; i++) {
 		inputArrayOfDice[i].position = 0;
 	}
@@ -28,7 +28,7 @@ void initializePresetDice(struct presetDice* inputArrayOfDice) {
 	Rolls the dice to be used at the start of each game. Puts the rolled dice in
 	game_dice. Does not shuffle the dice. Helper function.
 */
-void rollButNotShuffleDice(struct rolledDice* gameDice, struct presetDice* inputArrayOfDice) {
+void rollButNotShuffleDice(struct rolledDice *gameDice, struct presetDice *inputArrayOfDice) {
 	srand(time(NULL));
 	
 	for (int i = 0; i < 16; i++) {
@@ -37,7 +37,8 @@ void rollButNotShuffleDice(struct rolledDice* gameDice, struct presetDice* input
 	}
 }
 
-void shuffleRolledDicePositions(struct rolledDice* gameDice) { // Shuffles an array of rolled dice. Helper function.
+// Shuffles an array of rolled dice. Helper function.
+void shuffleRolledDicePositions(struct rolledDice *gameDice) { 
 
 	struct rolledDice newGameDice[16];
 
@@ -45,7 +46,8 @@ void shuffleRolledDicePositions(struct rolledDice* gameDice) { // Shuffles an ar
 	for (int i = 0; i < 16; i++) {
 		srand(time(NULL));
 		
-		while (gameDice[r].position == -1) { // This is somewhat inefficient. Using it for now.
+		// This is somewhat inefficient. Using it for now.
+		while (gameDice[r].position == -1) { 
 			r = (int) (rand()%16);
 		}
 		newGameDice[i] = gameDice[r];
@@ -62,16 +64,15 @@ void shuffleRolledDicePositions(struct rolledDice* gameDice) { // Shuffles an ar
 	Rolls the dice to be used at the start of the game and shuffles them, putting
 	the dice into the 2D array game_dice. Call once at the start of every game.
 */ 
-void rollDice(struct rolledDice** gameBoard,
-		struct presetDice* inputArrayOfDice){
+void rollDice(struct rolledDice **gameBoard, struct presetDice *inputArrayOfDice){
 
 	gameBoard[0] = malloc(sizeof(struct rolledDice) * 4);
 	gameBoard[1] = malloc(sizeof(struct rolledDice) * 4);
 	gameBoard[2] = malloc(sizeof(struct rolledDice) * 4);
 	gameBoard[3] = malloc(sizeof(struct rolledDice) * 4);
 
-	
-	struct rolledDice adjustedDiceArray[16]; // Temporary array of structs to contain adjusted 1D array of dice.
+	// Temporary array of structs to contain adjusted 1D array of dice.
+	struct rolledDice adjustedDiceArray[16]; 
 
 	rollButNotShuffleDice(adjustedDiceArray, inputArrayOfDice);
 	shuffleRolledDicePositions(adjustedDiceArray);
@@ -83,7 +84,8 @@ void rollDice(struct rolledDice** gameBoard,
 	}
 }
 
-void printGameBoard(struct rolledDice** gameBoard) { // Prints a visualization of the input array of rolled_dice.
+// Prints a visualization of the input array of rolled_dice.
+void printGameBoard(struct rolledDice **gameBoard) { 
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
