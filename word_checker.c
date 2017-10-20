@@ -7,38 +7,38 @@ char get_letter(int i, int j, struct rolled_dice **game_board){
     return game_board[i][j].character;
 }
 
-int abides_rules(int i, int j, char *word, struct rolled_dice** game_board, int sub_len, int **visited){
+int abides_rules(int i, int j, char *word, struct rolled_dice** game_board, int subLen, int **visited){
 	int adj_cell;
-	char current_letter = word[sub_len];
-	int ans = (sub_len == (strlen(word)-1));
+	char currentLetter = word[subLen];
+	int ans = (subLen == (strlen(word)-1));
 
 
-	if(sub_len == (strlen(word)-1)){
+	if(subLen == (strlen(word)-1)){
 		return 1;
 	}
 
 	// right, digUpRight, up, digUpLeft, left, digDownLeft, down, digDownRight
-	int all_x[] = {0, -1, -1, -1, 0, 1, 1, 1};
-	int all_y[] = {1, 1, 0, -1, -1, -1, 0, 1};
+	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
+	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
 
-		int new_x;
-		int new_y;
+		int newX;
+		int newY;
 	
-		char find_letter;
-			  find_letter = word[sub_len + 1];
+		char findLetter;
+			  findLetter = word[subLen + 1];
 			int result = 0;
 
 			for(adj_cell = 0; adj_cell < 8; adj_cell++){
-				int new_x = i + all_x[adj_cell];
-				int new_y = j + all_y[adj_cell];
-				if((new_x >= 0) && (new_x < 4) && (new_y >=0) && (new_y < 4) && toupper(find_letter) == get_letter(new_x, new_y, game_board) && !visited[new_x][new_y]){
-					visited[new_x][new_y] = 1;
-					++sub_len;
-					result = abides_rules(new_x, new_y, word, game_board, sub_len, visited);
+				int newX = i + allX[adj_cell];
+				int newY = j + allY[adj_cell];
+				if((newX >= 0) && (newX < 4) && (newY >=0) && (newY < 4) && toupper(findLetter) == get_letter(newX, newY, game_board) && !visited[newX][newY]){
+					visited[newX][newY] = 1;
+					++subLen;
+					result = abides_rules(newX, newY, word, game_board, subLen, visited);
 				if(result){
 					return 1;
 				}else{
-				--sub_len;
+				--subLen;
 				}
 						
 				}
@@ -100,45 +100,45 @@ char test_get_letter(int i, int j, char **boggle){
 
 
 
-int test_abides_rules(int i, int j, char *word, char **game_board, int sub_len, int **visited){
+int test_abides_rules(int i, int j, char *word, char **game_board, int subLen, int **visited){
 		int adj_cell;
-	// use sub_len as index to see what letter to find
-	char current_letter = word[sub_len];
-	int ans = (sub_len == (strlen(word)-1));
-	if(sub_len == (strlen(word)-1)){
+	// use subLen as index to see what letter to find
+	char currentLetter = word[subLen];
+	int ans = (subLen == (strlen(word)-1));
+	if(subLen == (strlen(word)-1)){
 		return 1;
 	}
 
-	int all_x[] = {0, -1, -1, -1, 0, 1, 1, 1};
-	int all_y[] = {1, 1, 0, -1, -1, -1, 0, 1};
+	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
+	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
 
-		int new_x;
-		int new_y;
+		int newX;
+		int newY;
 	
-		char find_letter;
-			if(toupper(current_letter) == 'Q' && toupper(word[sub_len + 2]) == test_get_letter(i,j,game_board)){
-				 find_letter = word[sub_len + 3];
-				 sub_len++;
-				 sub_len++;
-				 current_letter = word[sub_len];
+		char findLetter;
+			if(toupper(currentLetter) == 'Q' && toupper(word[subLen + 2]) == test_get_letter(i,j,game_board)){
+				 findLetter = word[subLen + 3];
+				 subLen++;
+				 subLen++;
+				 currentLetter = word[subLen];
 			}else{
-				find_letter = word[sub_len + 1];
+				findLetter = word[subLen + 1];
 			}
 			int result = 0;
 
 			for(adj_cell = 0; adj_cell < 8; adj_cell++){
-				int new_x = i + all_x[adj_cell];
-				int new_y = j + all_y[adj_cell];
-				if((new_x >= 0) && (new_x < 4) && (new_y >=0) && (new_y < 4) 
-					&& toupper(find_letter) == test_get_letter(new_x, new_y, game_board) 
-					&& !visited[new_x][new_y]){
-					visited[new_x][new_y] = 1;
-					++sub_len;
-					result = test_abides_rules(new_x, new_y, word, game_board, sub_len, visited);
+				int newX = i + allX[adj_cell];
+				int newY = j + allY[adj_cell];
+				if((newX >= 0) && (newX < 4) && (newY >=0) && (newY < 4) 
+					&& toupper(findLetter) == test_get_letter(newX, newY, game_board) 
+					&& !visited[newX][newY]){
+					visited[newX][newY] = 1;
+					++subLen;
+					result = test_abides_rules(newX, newY, word, game_board, subLen, visited);
 						if(result){
 						return 1;
 						}else{
-						--sub_len;
+						--subLen;
 						}
 				}
 		}
@@ -147,7 +147,7 @@ int test_abides_rules(int i, int j, char *word, char **game_board, int sub_len, 
 
 // Refactored Code Below - By: Alex Montague
 // Remember - Change Function Names
-int test_word_checker(char **boggle, char *word) {
+int testWordChecker(char** boggle, char* word) {
 	int row;
 	int letter;
 	int col;
@@ -191,7 +191,7 @@ int test_word_checker(char **boggle, char *word) {
 	return 0;
 }
 
-int hc_word_checker(char boggle[][4], char* word) {
+int hcWordChecker(char boggle[][4], char* word) {
 
 	int row;
 	int letter;
@@ -238,44 +238,42 @@ int hc_word_checker(char boggle[][4], char* word) {
 }
 
 
-int hc_abides_rules(int i, int j, char* word, char boggle[][4], int sub_len, int** visited) {
+int hcAbidesRules(int i, int j, char* word, char boggle[][4], int subLen, int** visited) {
 	int adj_cell;
-	int ans = (sub_len == (strlen(word) - 1));
-	int all_x[] = {0, -1, -1, -1, 0, 1, 1, 1};
-	int all_y[] = {1, 1, 0, -1, -1, -1, 0, 1};
-	int new_x = i + all_x[adj_cell];
-	int new_y = j + all_y[adj_cell];
-	int new_x;
-	int new_y;
+	int ans = (subLen == (strlen(word) - 1));
+	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
+	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
+	int newX = i + allX[adj_cell];
+	int newY = j + allY[adj_cell];
 	int result = 0;
-	char current_letter = word[sub_len];
-	char find_letter;
+	char currentLetter = word[subLen];
+	char findLetter;
 
-	if(sub_len == (strlen(word) - 1)){
+	if(subLen == (strlen(word) - 1)){
 		return 1;
 	}
 
-	if(toupper(current_letter) == 'Q' && toupper(word[sub_len + 2]) == hc_get_letter(i, j, boggle)) {
-		 find_letter = word[sub_len + 3];
-		 sub_len++;
-		 sub_len++;
-		 current_letter = word[sub_len];
+	if(toupper(currentLetter) == 'Q' && toupper(word[subLen + 2]) == hc_get_letter(i, j, boggle)) {
+		 findLetter = word[subLen + 3];
+		 subLen++;
+		 subLen++;
+		 currentLetter = word[subLen];
 	}
 	else{
-		find_letter = word[sub_len + 1];
+		findLetter = word[subLen + 1];
 	}
 
 	for(adj_cell = 0; adj_cell < 8; adj_cell++) {
-		if((new_x >= 0) && (new_x < 4) && (new_y >=0) && (new_y < 4) && toupper(find_letter) == hc_get_letter(new_x, new_y, boggle) && !visited[new_x][new_y]) {
-			visited[new_x][new_y] = 1;
-			sub_len++;
-			result = hc_abides_rules(new_x, new_y, word, boggle, sub_len, visited);
+		if((newX >= 0) && (newX < 4) && (newY >=0) && (newY < 4) && toupper(findLetter) == hc_get_letter(newX, newY, boggle) && !visited[newX][newY]) {
+			visited[newX][newY] = 1;
+			subLen++;
+			result = hc_abides_rules(newX, newY, word, boggle, subLen, visited);
 
 			if(result) {
 				return 1;
 			}
 			else{
-				sub_len--;
+				subLen--;
 			}	
 		}
 	}
@@ -284,6 +282,6 @@ int hc_abides_rules(int i, int j, char* word, char boggle[][4], int sub_len, int
 
 
 
-char hc_get_letter(int i, int j, char boggle[][4]) {
+char hcGetLetter(int i, int j, char boggle[][4]) {
 	return boggle[i][j];
 }
