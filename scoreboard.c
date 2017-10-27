@@ -75,7 +75,7 @@ int getIndexOfUserWithName(User *head, char *findName) {
     Finds whether or not a an existing user is already in the list. Of they are,returns 1. If not, returns 0.
  */
 
-int UserIsInList(User *head, char *findName) {
+int userIsInList(User *head, char *findName) {
 	User *current = head;
 	while (current != NULL) {
 		if (strcmp(current->name, findName) == 0) {
@@ -125,18 +125,18 @@ void printScoreboard(User *head) {
 	if (head->next != NULL) {
 		User *current = head->next;
 		while (current != NULL) {
-                printf("\n");
-                printf("Player name: %s \n", current->name);
-                printf("High score: %d \n", current->maxScore);
-                printf("Games played: %d \n", current->totalGames);
-                printf("Total score: %d \n", current->totalScore);
-                printf("\n");
-                printf("--------------------- \n");
+            printf("\n");
+            printf("Player name: %s \n", current->name);
+            printf("High score: %d \n", current->maxScore);
+            printf("Games played: %d \n", current->totalGames);
+            printf("Total score: %d \n", current->totalScore);
+            printf("\n");
+            printf("--------------------- \n");
 
-                if (current->next == NULL) {
-                    break;
+            if (current->next == NULL) {
+                break;
 			}
-        current = current->next;
+            current = current->next;
 		}
 	}
 }
@@ -159,9 +159,9 @@ void addNode(User *head, char *name, int maxScore) {
 	}
 }
 
-void UpdateNodeWithName(User *head, char* name, int currentScore) {
+void updateNodeWithName(User *head, char* name, int currentScore) {
 	if (UserIsInList(head, name) == 1) {
-		User *userPtr = FindUserWithName(head, name);
+		User *userPtr = findUserWithName(head, name);
 		if (currentScore > (userPtr->maxScore)) {
 			userPtr->maxScore = currentScore;
 		}
