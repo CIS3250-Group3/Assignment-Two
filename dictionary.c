@@ -18,7 +18,7 @@ unsigned int hash (const char *s) {
 	for (unsigned int hashVal = 0; *s != '\0'; s++) {
 		hashVal = *s + 31 * hashVal;
 	}
-	return hashVal ;
+	return hashVal;
 }
 
 /*
@@ -32,11 +32,13 @@ DictionaryNode *lookup (DictionaryNode **dictionary, int hashSize, const char *k
 
 	//determines next dictionary node
 	for (DictionaryNode *nextPtr = dictionary[hashVal % hashSize]; nextPtr != NULL; nextPtr = nextPtr->next) {
-		if (strcmp (key, nextPtr->key) == 0) {
+		if (strcmp(key, nextPtr->key) == 0) {
 			return nextPtr; 
 		}
 	}
-	return NULL; //not found
+
+	//not found
+	return NULL;
 }
 
 /*
@@ -98,16 +100,18 @@ void freeDictionary (DictionaryNode **dictionary, int hashSize) {
  	copyString: This function copies the content insides the passed string into 
  	another string, and ensures null termination is present
 */
-char *copyString (const char *s) { /* make a duplicate of s */
+char *copyString (const char *s) {
 	//Variable declations and initializations
-	char *p = (char *) malloc(len+1); //+1 for '\0'
+	char *p = (char *) malloc(len + 1); //+1 for '\0'
 	int len = strlen(s);
 
 	//checks if p (string) is empty, if so copies s (string contents)
 	if (p != NULL) {
 		strncpy(p, s, len);
 	}
-	p[len] = '\0'; //adds a null terminator char to end of p (string)
+
+	//adds a null terminator char to end of p (string)
+	p[len] = '\0';
 
 	return p;
 }
