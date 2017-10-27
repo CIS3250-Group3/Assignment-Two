@@ -147,21 +147,16 @@ int test_abides_rules(int i, int j, char *word, char **game_board, int subLen, i
 
 // Refactored Code Below - By: Alex Montague
 // Remember - Change Function Names
-int testWordChecker(char** boggle, char* word) {
-	int row;
-	int letter;
-	int col;
-	int m;
-	int n;
-	int** visited = malloc(sizeof(int*) * 4);
+int testWordChecker(char **boggle, char *word) {
+	int **visited = malloc(sizeof(int*) * 4);
 
 	visited[0] = malloc(sizeof(int) * 4);
 	visited[1] = malloc(sizeof(int) * 4);
 	visited[2] = malloc(sizeof(int) * 4);
 	visited[3] = malloc(sizeof(int) * 4);
 
-	for(m = 0; m < 4; m++) {
-		for(n = 0; n < 4; n++) {
+	for(int m = 0; m < 4; m++) {
+		for(int n = 0; n < 4; n++) {
 			if(m == 0 && n == 0) {
 				visited[m][n] = 1;
 			}
@@ -191,22 +186,16 @@ int testWordChecker(char** boggle, char* word) {
 	return 0;
 }
 
-int hcWordChecker(char boggle[][4], char* word) {
-
-	int row;
-	int letter;
-	int col;
-	int m;
-	int n;
-	int** visited = malloc(sizeof(int* ) * 4);
+int hcWordChecker(char boggle[][4], char *word) {
+	int **visited = malloc(sizeof(int*) * 4);
 
 	visited[0] = malloc(sizeof(int) * 4);
 	visited[1] = malloc(sizeof(int) * 4);
 	visited[2] = malloc(sizeof(int) * 4);
 	visited[3] = malloc(sizeof(int) * 4);
 
-	for(m = 0; m < 4; m++) {
-		for(n = 0; n < 4; n++) {
+	for(int m = 0; m < 4; m++) {
+		for(int n = 0; n < 4; n++) {
 			if(m == 0 && n == 0) {
 				visited[m][n] = 1;
 			}
@@ -218,7 +207,7 @@ int hcWordChecker(char boggle[][4], char* word) {
 
 	for(int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
-			if(hc_abides_rules(row, col, word, boggle, 0, visited)) {
+			if(hcAbidesRules(row, col, word, boggle, 0, visited)) {
 				free(visited[0]);
 				free(visited[1]);
 				free(visited[2]);
@@ -239,40 +228,40 @@ int hcWordChecker(char boggle[][4], char* word) {
 
 
 int hcAbidesRules(int i, int j, char* word, char boggle[][4], int subLen, int** visited) {
-	int adj_cell;
+	int adjCell;
 	int ans = (subLen == (strlen(word) - 1));
 	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
 	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
-	int newX = i + allX[adj_cell];
-	int newY = j + allY[adj_cell];
+	int newX = i + allX[adjCell];
+	int newY = j + allY[adjCell];
 	int result = 0;
 	char currentLetter = word[subLen];
 	char findLetter;
 
-	if(subLen == (strlen(word) - 1)){
+	if(subLen == (strlen(word) - 1)) {
 		return 1;
 	}
 
-	if(toupper(currentLetter) == 'Q' && toupper(word[subLen + 2]) == hc_get_letter(i, j, boggle)) {
+	if(toupper(currentLetter) == 'Q' && toupper(word[subLen + 2]) == hcGetLetter(i, j, boggle)) {
 		 findLetter = word[subLen + 3];
 		 subLen++;
 		 subLen++;
 		 currentLetter = word[subLen];
 	}
-	else{
+	else {
 		findLetter = word[subLen + 1];
 	}
 
-	for(adj_cell = 0; adj_cell < 8; adj_cell++) {
-		if((newX >= 0) && (newX < 4) && (newY >=0) && (newY < 4) && toupper(findLetter) == hc_get_letter(newX, newY, boggle) && !visited[newX][newY]) {
+	for(adjCell = 0; adjCell < 8; adjCell++) {
+		if((newX >= 0) && (newX < 4) && (newY >= 0) && (newY < 4) && toupper(findLetter) == hcGetLetter(newX, newY, boggle) && !visited[newX][newY]) {
 			visited[newX][newY] = 1;
 			subLen++;
-			result = hc_abides_rules(newX, newY, word, boggle, subLen, visited);
+			result = hcAbidesRules(newX, newY, word, boggle, subLen, visited);
 
 			if(result) {
 				return 1;
 			}
-			else{
+			else {
 				subLen--;
 			}	
 		}
