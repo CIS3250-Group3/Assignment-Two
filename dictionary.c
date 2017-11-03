@@ -1,6 +1,6 @@
 #include <string.h>
-#include "dictionary.h"
 #include <stdio.h>
+#include "dictionary.h"
 
 //form hash value for string s
 //this produces a starting value in the dictionary array
@@ -9,10 +9,10 @@ unsigned hash(const char *s) {
 	for (hashval = 0; *s != '\0'; s++) {
 		hashval = *s + 31 * hashval;
 	}
-	return hashval ;
+	return hashval;
 }
 
-DNode *lookup (DNode **dictionary, int hashSize, const char *key) {
+DNode *lookup(DNode **dictionary, int hashSize, const char *key) {
 	DNode *np;
 	unsigned int hashval = hash(key);
 	for (np = dictionary [hashval % hashSize]; np != NULL; np = np->next) {
@@ -23,7 +23,7 @@ DNode *lookup (DNode **dictionary, int hashSize, const char *key) {
 	return NULL; //not found
 }
 
-DNode *insert (DNode **dictionary, int hashSize, const char *key) {
+DNode *insert(DNode **dictionary, int hashSize, const char *key) {
 	unsigned int hashval;
 	DNode *np;
 
@@ -42,7 +42,7 @@ DNode *insert (DNode **dictionary, int hashSize, const char *key) {
 	return np;
 }
 
-void freeDictionary (DNode **dictionary, int hashSize) {
+void freeDictionary(DNode **dictionary, int hashSize) {
 	for (int i = 0; i < hashSize; i++) { 
 		//if there is an entry at position i
 		if (dictionary [i] != NULL) { 
@@ -51,7 +51,7 @@ void freeDictionary (DNode **dictionary, int hashSize) {
 			while (current != NULL) {
 				DNode * temp = current;
 				current = current->next;
-				free (temp);
+				free(temp);
 			}
 			dictionary[i] = NULL;
 		}

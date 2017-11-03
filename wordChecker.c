@@ -1,32 +1,28 @@
 #include <stdio.h>
 #include <string.h>
-#include "wordChecker.h"
 #include <ctype.h>
+#include "wordChecker.h"
 
 char getLetter(int i, int j, RolledDice **gameBoard) {
     return gameBoard[i][j].character;
 }
 
-int abidesRules(int i, int j, char *word, RolledDice** gameBoard, int subLen, int **visited) {
+int abidesRules(int i, int j, char *word, RolledDice **gameBoard, int subLen, int **visited) {
 	int adjCell;
 	int newX;
 	int newY;
+	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
+	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
+	int result = 0;
+	char findLetter = word[subLen + 1];
 
 	if(subLen == (strlen(word) - 1)) {
 		return 1;
 	}
 
-	// right, digUpRight, up, digUpLeft, left, digDownLeft, down, digDownRight
-	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
-	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
-
-	char findLetter = word[subLen + 1];
-	int result = 0;
-
 	for (adjCell = 0; adjCell < 8; adjCell++) {
 		newX = i + allX[adjCell];
 		newY = j + allY[adjCell];
-
 		if ((newX >= 0) && (newX < 4) && (newY >= 0) && (newY < 4) && toupper(findLetter) == getLetter(newX, newY, gameBoard) && !visited[newX][newY]) {
 			visited[newX][newY] = 1;
 			subLen++;
@@ -43,7 +39,6 @@ int abidesRules(int i, int j, char *word, RolledDice** gameBoard, int subLen, in
 	}
 	return 0;
 }
-
 
 int wordChecker(RolledDice **gameBoard, char *word) {
 	int m;
@@ -84,7 +79,6 @@ int wordChecker(RolledDice **gameBoard, char *word) {
 	free(visited[3]);
 
 	return 0;
-
 }
 
 char testGetLetter(int i, int j, char **boggle) {
@@ -93,19 +87,19 @@ char testGetLetter(int i, int j, char **boggle) {
 
 int testAbidesRules(int i, int j, char *word, char **gameBoard, int subLen, int **visited) {
 	int adjCell;
-	char findLetter;
-	char currentLetter = word[subLen];
 	int allX[] = {0, -1, -1, -1, 0, 1, 1, 1};
 	int allY[] = {1, 1, 0, -1, -1, -1, 0, 1};
 	int result = 0;
 	int newX;
 	int newY;
+	char findLetter;
+	char currentLetter = word[subLen];
 
-	if (subLen == (strlen(word)-1)) {
+	if (subLen == (strlen(word) - 1)) {
 		return 1;
 	}
 	
-	if (toupper(currentLetter) == 'Q' && toupper(word[subLen + 2]) == testGetLetter(i,j,gameBoard)) {
+	if (toupper(currentLetter) == 'Q' && toupper(word[subLen + 2]) == testGetLetter(i, j, gameBoard)) {
 		findLetter = word[subLen + 3];
 		subLen++;
 		subLen++;
@@ -115,7 +109,7 @@ int testAbidesRules(int i, int j, char *word, char **gameBoard, int subLen, int 
 		findLetter = word[subLen + 1];
 	}
 
-	for(adjCell = 0; adjCell < 8; adjCell++) {
+	for (adjCell = 0; adjCell < 8; adjCell++) {
 		newX = i + allX[adjCell];
 		newY = j + allY[adjCell];
 		if ((newX >= 0) && (newX < 4) && (newY >= 0) && (newY < 4) && toupper(findLetter) == testGetLetter(newX, newY, gameBoard) && !visited[newX][newY]) {
