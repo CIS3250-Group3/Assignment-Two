@@ -1,3 +1,14 @@
+/*
+	file: scoreboard.c
+	student email(s): yhovich@uoguelph.ca, isinan@uoguelph.ca, amontagu@uoguelph.ca,
+	ssial@uoguelph.ca, ramsayl@uoguelph.ca, mabdulba@uoguelph.ca,
+	group #: Group 3 (Section 2)
+	date: November 3, 2017
+	description: File containing the source code for accessor and mutator functions 
+	for User ADT
+*/
+
+/*Standard/User Defined Libraries*/
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -23,7 +34,7 @@ User *findUserWithName(User *head, char *nameToFind) {
 	return NULL;
 }
 
-/* frees every element of the linked list */
+// freeAll: This function frees the memory of all elements of the linked list.
 void freeAll(User *head) {
 	if (head->next == NULL) {
 		free(head);
@@ -39,6 +50,7 @@ void freeAll(User *head) {
 	}
 }
 
+// getUserAtIndex: Finds and returns a the User in the linked list at a specified index
 User *getUserAtIndex(User *head, int index) {
 	if (head == NULL) {
 		return NULL;
@@ -55,6 +67,10 @@ User *getUserAtIndex(User *head, int index) {
 	return NULL;
 }
 
+/*
+ 	getIndexOfUserWithName: Finds and returns a the index in the linked list based on the specified 
+ 	name of user
+*/
 int getIndexOfUserWithName(User *head, char *nameToFind) {
 	if (head == NULL && head->name != nameToFind) {
 		return -1;
@@ -72,9 +88,9 @@ int getIndexOfUserWithName(User *head, char *nameToFind) {
 }
 
 /*
- * Finds whether or not a an existing user is already in the list. Of they are,
- * returns 1. If not, returns 0.
- */
+ 	userIsInList: Finds whether or not a an existing user is already in the list. If they are,
+ 	returns 1. If not, returns 0.
+*/
 int userIsInList(User *head, char *nameToFind) {
 	User *current = head;
 	while (current != NULL) {
@@ -86,6 +102,7 @@ int userIsInList(User *head, char *nameToFind) {
 	return 0;
 }
 
+// getLength: Finds and returns the amount of User nodes in the linked list
 int getLength(User *head) {
 	if (head == NULL) {
 		return 0;
@@ -103,10 +120,9 @@ int getLength(User *head) {
 }
 
 /*
- * Helper function. Finds the last node in the linked list and returns it.
- * Returns NULL if called with an empty head, although such a case is not used
- * in the main function addNode.
- */
+ 	getLastNode: Finds the last node in the linked list and returns it. Returns NULL if called
+ 	with an empty head, although such a case is not used in the main function addNode. Helper function.
+*/
 User *getLastNode(User *head) {
 	if (head == NULL) {
 		return head;
@@ -121,6 +137,7 @@ User *getLastNode(User *head) {
 	return NULL;
 }
 
+// printScoreboard: Outputs the player name, high score, games played, total score in an organized format
 void printScoreboard(User *head) {
         fprintf(stdout, "\n");
         fprintf(stdout, "---- SCORE BOARD ---- \n");
@@ -143,6 +160,7 @@ void printScoreboard(User *head) {
 	}
 }
 
+// addNode: Initializes a User Node and inserts it at the tail of the linked list
 void addNode(User *head, char *name, int maxScore) {
 	User *userPtr = NULL;
 	if (head != NULL) {
@@ -162,6 +180,7 @@ void addNode(User *head, char *name, int maxScore) {
 	}
 }
 
+// updateNodeWithName: Updates the User score by finding the user in the linked list by it's name.
 void updateNodeWithName(User *head, char *name, int currentScore) {
 	if (userIsInList(head, name) == 1) {
 		User *userPtr = findUserWithName(head, name);

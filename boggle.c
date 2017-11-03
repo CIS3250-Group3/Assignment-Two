@@ -1,3 +1,13 @@
+/*
+	file: boggle.c
+	student email(s): yhovich@uoguelph.ca, isinan@uoguelph.ca, amontagu@uoguelph.ca,
+	ssial@uoguelph.ca, ramsayl@uoguelph.ca, mabdulba@uoguelph.ca,
+	group #: Group 3 (Section 2)
+	date: November 3, 2017
+	description: File containing the main source code to execute boggle game.
+*/
+
+/*Standard/User Defined Libraries*/
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -6,14 +16,15 @@
 #include "wordChecker.h"
 #include "scoreboard.h"
 
+/*Defines constants*/
 #define MAX_LINE 100
 
-/**
- - set up board,
- - set up dictionary,
- **/
-
-
+/*
+ 	freeAndResetBoard: This function frees memory associated with gameBoard and
+ 	calls upon the rollDice function to effectively reset the board for a new game.
+ 	Parameters: RolledDice **gameBoard, PresetDice *inputArrayOfDice
+ 	Return: N/A
+*/
 void freeAndResetBoard(RolledDice **gameBoard, PresetDice *inputArrayOfDice) {
 	for (int i = 0; i < 4; i++) {
 		free(gameBoard[i]);
@@ -21,7 +32,11 @@ void freeAndResetBoard(RolledDice **gameBoard, PresetDice *inputArrayOfDice) {
 	rollDice(gameBoard, inputArrayOfDice);
 }
 
-
+/*
+ 	convertToUpper: Converts individual characters in a string to uppercase versions.
+ 	Parameters: char **upper
+ 	Return: char *
+*/
 char *convertToUpper(char **upper) {
 	char *upperDeref = *upper;
 
@@ -31,6 +46,11 @@ char *convertToUpper(char **upper) {
 	return upperDeref;
 }
 
+/*
+ 	convertToUpper2: Converts individual characters in a string to uppercase versions.
+ 	Parameters: char (*upper)[]
+ 	Return: char *
+*/
 char *convertToUpper2(char (*upper)[]) {
 	char *upperDeref = *upper;
 
@@ -40,6 +60,12 @@ char *convertToUpper2(char (*upper)[]) {
 	return upperDeref;
 }
 
+/*
+ 	incrementTotalScore: increments user score by a certian value based on the
+ 	length of the inputted (found) word.
+ 	Parameters: int *userScore, char *word
+ 	Return: N/A
+*/
 void incrementTotalScore(int *userScore, char *word) {
 	int wordLen = strlen(word);
 	fprintf(stdout, "wordLen: %d\n", wordLen);
@@ -60,7 +86,6 @@ void incrementTotalScore(int *userScore, char *word) {
 		*userScore+=11;
 	}
 }
-
 
 int main (int argc, char ** argv) {
 	FILE *inputFP;

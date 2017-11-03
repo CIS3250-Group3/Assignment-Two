@@ -1,6 +1,17 @@
+/*
+	file: boardGenerator.c
+	student email(s): yhovich@uoguelph.ca, isinan@uoguelph.ca, amontagu@uoguelph.ca,
+	ssial@uoguelph.ca, ramsayl@uoguelph.ca, mabdulba@uoguelph.ca,
+	group #: Group 3 (Section 2)
+	date: November 3, 2017
+	description: File containing the source code for accessor and mutator functions 
+	for PresetDice and RolledDice ADTs
+*/
+
+/*User Defined Libraries*/
 #include "boardGenerator.h"
 
-// Initializes the dice in the list of pre-set dice. Call once at program start.
+// initializePresetDice: Initializes the dice in the list of pre-set dice. Call once at program start.
 void initializePresetDice(PresetDice *inputArrayOfDice) {
 	for (int i = 0; i < 16; i++) {
 		inputArrayOfDice[i].position = 0;
@@ -57,7 +68,6 @@ void shuffleRolledDicePositions(RolledDice *gameDice) {
 	}
 }
 
-
 /*
 	Rolls the dice to be used at the start of the game and shuffles them, putting
 	the dice into the 2D array gameDice. Call once at the start of every game.
@@ -95,6 +105,7 @@ void printGameBoard(RolledDice **gameBoard) {
 	}
 }
 
+// printHcBoard: Prints a visualization of the input 2D array boggle.
 void printHcBoard(char boggle[][4]) {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -108,7 +119,10 @@ void printHcBoard(char boggle[][4]) {
 	}
 }
 
-// Converts board from a string version to 2D array. Used in test mode
+/*
+ 	convertToBoard: Rolls the dice to be used at the start of the game and shuffles them, putting
+	the dice into the 2D array gameDice. Call once at the start of every game.
+*/
 void convertToBoard(char *letters, char ***board){
 	// Allocate space for boggle board on heap in order to access it in main. 
 	int t = 0;

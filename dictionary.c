@@ -1,9 +1,22 @@
+/*
+	file: dictionary.c
+	student email(s): yhovich@uoguelph.ca, isinan@uoguelph.ca, amontagu@uoguelph.ca,
+	ssial@uoguelph.ca, ramsayl@uoguelph.ca, mabdulba@uoguelph.ca,
+	group #: Group 3 (Section 2)
+	date: November 3, 2017
+	description: File containing the source code for accessor and mutator functions 
+	for DNode ADT
+*/
+
+/*Standard/User Defined Libraries*/
 #include <string.h>
 #include <stdio.h>
 #include "dictionary.h"
 
-//form hash value for string s
-//this produces a starting value in the dictionary array
+/*
+ 	hash: This function forms a hash value for string s. This produces a starting
+ 	value in the dictionary array.
+*/
 unsigned hash(const char *s) {
 	unsigned hashval;
 	for (hashval = 0; *s != '\0'; s++) {
@@ -12,6 +25,11 @@ unsigned hash(const char *s) {
 	return hashval;
 }
 
+/*
+ 	lookup: This function begins searching at an appropriate location (which is 
+ 	determined based on the remainder of dividing hash value and hash size 
+ 	values) for the key (in the dictionary) with the same value.
+*/
 DNode *lookup(DNode **dictionary, int hashSize, const char *key) {
 	DNode *np;
 	unsigned int hashval = hash(key);
@@ -23,6 +41,10 @@ DNode *lookup(DNode **dictionary, int hashSize, const char *key) {
 	return NULL; //not found
 }
 
+/*
+ 	insert: This function inserts a dictionary node at an appropriate location 
+ 	of the dictionary array.
+*/
 DNode *insert(DNode **dictionary, int hashSize, const char *key) {
 	unsigned int hashval;
 	DNode *np;
@@ -42,6 +64,10 @@ DNode *insert(DNode **dictionary, int hashSize, const char *key) {
 	return np;
 }
 
+/*
+ 	freeDictionary: This function frees the memory that the dictionary array 
+ 	(and it's nodes) take up.
+*/
 void freeDictionary(DNode **dictionary, int hashSize) {
 	for (int i = 0; i < hashSize; i++) { 
 		//if there is an entry at position i
@@ -58,7 +84,10 @@ void freeDictionary(DNode **dictionary, int hashSize) {
 	}
 }
 
-/* make a duplicate of s */
+/*
+ 	copyString: This function copies the content insides the passed string into 
+ 	another string, and ensures null termination is present
+*/
 char *copystr(const char *s) { 
 	int len = strlen(s);
 	char *p = (char *)malloc(len + 1);
