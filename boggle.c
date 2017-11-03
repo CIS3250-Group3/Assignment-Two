@@ -5,6 +5,7 @@
 	group #: Group 3 (Section 2)
 	date: November 3, 2017
 	description: File containing the main source code to execute boggle game.
+	Refactored By: Sawaiba Sial
 */
 
 /*Standard/User Defined Libraries*/

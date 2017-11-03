@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the function definitions for User ADTs	accessor and
 	mutator functions.
+	Refactored By: Yonatan Hovich
 */
 
 /*Checks to see if SCOREBOARD_H is defined, defines SCOREBOARD_H if not*/

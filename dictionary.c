@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the source code for accessor and mutator functions 
 	for DNode ADT
+	Refactored By: Yonatan Hovich
 */
 
 /*Standard/User Defined Libraries*/

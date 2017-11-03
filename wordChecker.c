@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the source code for functions to check validity of
 	inputted words from the user based on game rules
+	Refactored By: Alexander Montague & Mayez Abdulba
 */
 
 /*Standard/User Defined Libraries*/

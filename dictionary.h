@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the function definitions for DictionaryNode ADT accessor
 	and mutator functions.
+	Refactored By: Yonatan Hovich
 */
 
 /*Checks to see if DICTIONARY_H is defined, defines DICTIONARY_H if not*/

@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the function definitions accessor functions that verify that the
 	rules are abided by for the game.
+	Refactored By: Yonatan Hovich
 */
 
 /*Standard Libraries*/

@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the source code for accessor and mutator functions 
 	for User ADT
+	Refactored By: Israa Sinan
 */
 
 /*Standard/User Defined Libraries*/

@@ -6,6 +6,7 @@
 	date: November 3, 2017
 	description: File containing the function definitions for PresetDice & RolledDice ADTs
 	accessor and mutator functions.
+	Refactored By: Yonatan Hovich
 */
 
 /*Checks to see if BOARD_GEN is defined, defines BOARD_GEN if not*/
